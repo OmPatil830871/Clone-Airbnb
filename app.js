@@ -93,9 +93,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.get("/", (req, res) => {
-//     res.send("Welcome to Home Page");
-// });
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 app.get("/listings", wrapAsync(ListingController.indexlistingsget));
 app.get("/listings/search", wrapAsync(ListingController.searchListings));
