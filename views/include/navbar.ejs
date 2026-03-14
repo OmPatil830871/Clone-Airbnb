@@ -14,6 +14,13 @@
 
             </div>
 
+            <form class="mx-auto search-bar" action="/listings/search" method="GET">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" name="search" class="search-input" placeholder="Search listings...">
+                </div>
+            </form>
+
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Add New Listing</a>
                 <%if(!currentUser){ %>

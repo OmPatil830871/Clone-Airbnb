@@ -98,6 +98,7 @@ app.use((req, res, next) => {
 // });
 
 app.get("/listings", wrapAsync(ListingController.indexlistingsget));
+app.get("/listings/search", wrapAsync(ListingController.searchListings));
 
 app.get("/listings/category/:category", async(req, res) => {
 

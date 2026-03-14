@@ -105,3 +105,35 @@ footer {
 .show-edit {
     margin-right: 1rem !important;
 }
+
+.search-bar {
+    width: 380px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 20px 10px 45px;
+    /* space for icon */
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 5px rgba(255, 56, 92, 0.4);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    font-size: 14px;
+}

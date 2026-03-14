@@ -76,3 +76,13 @@ module.exports.deletelistingsdelete = async(req, res) => {
     req.flash("success", "Listing Deleted Successfully")
     res.redirect("/listings");
 }
+
+module.exports.searchListings = async(req, res) => {
+    const { search } = req.query;
+
+    const listings = await Listing.find({
+        title: { $regex: search, $options: "i" }
+    });
+
+    res.render("listings/index", { allListings: listings });
+};
