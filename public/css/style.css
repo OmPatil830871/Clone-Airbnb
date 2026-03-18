@@ -1,3 +1,5 @@
+/* Global */
+
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
     min-height: 100vh;
@@ -10,7 +12,7 @@ footer {
 }
 
 
-/* NAVBAR */
+/* Navbar */
 
 .navbar {
     height: 5rem;
@@ -18,7 +20,6 @@ footer {
     position: sticky;
     top: 0;
     z-index: 1050;
-    /* keeps navbar above everything */
 }
 
 .fa-compass {
@@ -30,17 +31,7 @@ footer {
     color: #222222 !important;
 }
 
-
-/* ========================= */
-
-
-/* NAVBAR MOBILE FIX */
-
-
-/* ========================= */
-
 @media (max-width: 768px) {
-    /* DROPDOWN MENU */
     #navbarNavAltMarkup {
         position: absolute;
         top: 100%;
@@ -51,40 +42,38 @@ footer {
         z-index: 1040;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    /* STACK ITEMS */
     .navbar-nav {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-    /* EACH LINK */
     .navbar-nav .nav-link {
         width: 100%;
         padding: 0.8rem 0;
         border-bottom: 1px solid #ddd;
     }
-    /* SEARCH */
+    .navbar-nav.ms-auto {
+        width: 100%;
+    }
     .search-bar {
         width: 100%;
         margin: 1rem 0;
     }
-    /* RIGHT MENU */
-    .navbar-nav.ms-auto {
-        width: 100%;
-    }
 }
 
 
-/* FOOTER */
+/* Footer */
 
-.f-info-links a {
-    text-decoration: none;
-    color: #222222;
-}
-
-.f-info-links a:hover {
-    text-decoration: underline;
+.f-info {
+    text-align: center;
+    font-size: 1.2rem;
+    height: 7rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .f-info-links,
@@ -96,46 +85,47 @@ footer {
     align-items: center;
 }
 
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
 .f-info-socials i {
     margin-left: 1.2rem;
 }
 
-.f-info {
-    text-align: center;
-    font-size: 1.2rem;
-    height: 7rem;
-    background-color: #ebebeb;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
-}
 
-
-/* LISTINGS */
+/* Listings */
 
 .listing-card {
     border: none !important;
     margin-bottom: 2rem;
-    transition: transform 0.2s;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .listing-card:hover {
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card-img-top {
-    border-radius: 1rem;
     width: 100%;
+    height: 220px;
     object-fit: cover;
 }
 
 .card-body {
-    padding: 0 !important;
+    padding: 1rem !important;
 }
 
-.card-text p {
-    font-weight: 400 !important;
+.card-text {
+    font-weight: 400;
 }
 
 .listing-link {
@@ -145,6 +135,7 @@ footer {
 
 .card-img-overlay {
     opacity: 0;
+    transition: 0.2s;
 }
 
 .card-img-overlay:hover {
@@ -153,19 +144,23 @@ footer {
 }
 
 
-/* SHOW PAGE */
+/* Show page */
 
 .show_img {
-    height: 30vh;
-    width: 30rem !important;
-}
-
-.card-text {
-    width: 28rem !important;
+    width: 100% !important;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .show-btns {
-    display: flex !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.show-btns button {
+    flex: 1;
 }
 
 .show-edit {
@@ -173,10 +168,23 @@ footer {
 }
 
 
-/* SEARCH BAR */
+/* Review card */
+
+.review-card {
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Search bar */
 
 .search-bar {
     width: 380px;
+    max-width: 100%;
 }
 
 .search-container {
@@ -204,4 +212,32 @@ footer {
     transform: translateY(-50%);
     color: #777;
     font-size: 14px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+    .show_img {
+        height: 200px;
+    }
+    .show-btns {
+        flex-direction: column;
+    }
+    .show-btns button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    h3 {
+        font-size: 1.4rem;
+    }
+    h4 {
+        font-size: 1.2rem;
+    }
 }
