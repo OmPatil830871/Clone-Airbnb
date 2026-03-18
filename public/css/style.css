@@ -9,14 +9,20 @@ footer {
     margin-top: auto;
 }
 
+
+/* NAVBAR */
+
 .navbar {
     height: 5rem;
     background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    /* keeps navbar above everything */
 }
 
 .fa-compass {
     color: #fe424d;
-    /*  styling to symbol */
     font-size: 2rem;
 }
 
@@ -24,12 +30,60 @@ footer {
     color: #222222 !important;
 }
 
+
+/* ========================= */
+
+
+/* NAVBAR MOBILE FIX */
+
+
+/* ========================= */
+
+@media (max-width: 768px) {
+    /* DROPDOWN MENU */
+    #navbarNavAltMarkup {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 1rem;
+        z-index: 1040;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    /* STACK ITEMS */
+    .navbar-nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    /* EACH LINK */
+    .navbar-nav .nav-link {
+        width: 100%;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #ddd;
+    }
+    /* SEARCH */
+    .search-bar {
+        width: 100%;
+        margin: 1rem 0;
+    }
+    /* RIGHT MENU */
+    .navbar-nav.ms-auto {
+        width: 100%;
+    }
+}
+
+
+/* FOOTER */
+
 .f-info-links a {
     text-decoration: none;
     color: #222222;
 }
 
-.f-info link a:hover {
+.f-info-links a:hover {
     text-decoration: underline;
 }
 
@@ -57,12 +111,20 @@ footer {
     align-items: space-evenly;
 }
 
+
+/* LISTINGS */
+
 .listing-card {
     border: none !important;
     margin-bottom: 2rem;
+    transition: transform 0.2s;
 }
 
-.card-image-top {
+.listing-card:hover {
+    transform: scale(1.02);
+}
+
+.card-img-top {
     border-radius: 1rem;
     width: 100%;
     object-fit: cover;
@@ -78,6 +140,7 @@ footer {
 
 .listing-link {
     text-decoration: none;
+    color: black;
 }
 
 .card-img-overlay {
@@ -88,6 +151,9 @@ footer {
     opacity: 0.2;
     background-color: white;
 }
+
+
+/* SHOW PAGE */
 
 .show_img {
     height: 30vh;
@@ -106,6 +172,9 @@ footer {
     margin-right: 1rem !important;
 }
 
+
+/* SEARCH BAR */
+
 .search-bar {
     width: 380px;
 }
@@ -117,7 +186,6 @@ footer {
 .search-input {
     width: 100%;
     padding: 10px 20px 10px 45px;
-    /* space for icon */
     border-radius: 30px;
     border: 1px solid #ddd;
     outline: none;

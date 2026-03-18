@@ -1,7 +1,15 @@
 <% layout("/layouts/boilerplate") %>
 
-
     <style>
+        /* FILTER NAVBAR */
+        
+        #filtersNavbar {
+            background-color: white;
+            padding: 1rem;
+            width: 100%;
+        }
+        /* FILTERS */
+        
         #filters {
             display: flex;
             align-items: center;
@@ -10,27 +18,34 @@
         }
         
         .filters {
-            text-decoration: none;
-            text-align: center;
-            margin-top: 1rem;
-            margin-right: 2rem;
+            margin: 1rem;
             opacity: 0.7;
+            flex-shrink: 0;
+            text-decoration: none;
+            color: black;
+            display: block;
+            text-align: center;
         }
         
         .filters:hover {
-            color: black;
             opacity: 1;
         }
         
-        .filters div a {
-            color: black;
-            text-decoration: none;
-            opacity: 0.7;
+        .filters div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        .tax-info {
-            display: none;
+        .filters i {
+            font-size: 1.3rem;
         }
+        
+        .filters p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+        /* TAX */
         
         .tax-toggle {
             border: 1px solid black;
@@ -42,125 +57,159 @@
             align-items: center;
             white-space: nowrap;
         }
+        
+        .tax-info {
+            display: none;
+        }
+        /* MOBILE */
+        
+        @media (max-width: 768px) {
+            #filters {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .filters {
+                width: 100%;
+                border-bottom: 1px solid #ddd;
+                padding: 0.8rem 0;
+            }
+            .filters div {
+                flex-direction: row;
+                gap: 1rem;
+            }
+            .filters p {
+                font-size: 1rem;
+            }
+            .tax-toggle {
+                width: 100%;
+                margin-top: 1rem;
+                justify-content: space-between;
+            }
+        }
+        /* LISTINGS */
+        
+        .listing-link {
+            text-decoration: none;
+            color: black;
+        }
+        
+        .listing-card {
+            margin-bottom: 2rem;
+            border: none;
+            transition: transform 0.2s;
+        }
+        
+        .listing-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .card-img-top {
+            border-radius: 1rem;
+            object-fit: cover;
+        }
+        
+        .row {
+            margin-top: 1rem;
+        }
     </style>
 
-    <nav class="navbar navbar-expand-lg bg-white mb-3">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white mb-3 shadow-sm">
         <div class="container-fluid">
 
-            <!-- Toggle Button -->
+            <!-- HAMBURGER -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#filtersNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-            <!-- Category Filters (Collapsible) -->
+            <!-- MENU -->
             <div class="collapse navbar-collapse" id="filtersNavbar">
+
+                <!-- FILTERS -->
                 <div id="filters" class="navbar-nav">
-                    <div class="filters">
-                        <div><a href="/listings/category/mountain"><i class="fa-solid fa-mountain"></i></a>
-                            <p>Mountain</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div><a href="/listings/category/beach"><i class="fa-solid fa-umbrella-beach"></i></a>
-                            <p>Beach</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div>
-                            <a href="/listings/category/farm"><i class="fa-solid fa-cow"></i></a>
-                            <p>Farm</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div> <a href="/listings/category/castle"><i class="fa-brands fa-fort-awesome"></i></a>
-                            <p>Castle</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div><a href="/listings/category/pool"><i class="fa-solid fa-person-swimming"></i></a>
-                            <p>Pool</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div>
-                            <a href="/listings/category/cities"><i class="fa-solid fa-city"></i></a>
-                        </div>
-                        <p>Cities</p>
-                    </div>
-                    <div class="filters nav-item">
-                        <div>
-                            <a href="/listings/category/campain"><i class="fa-solid fa-campground"></i></a>
-                        </div>
-                        <p>Camping</p>
-                    </div>
-                    <div class="filters nav-item">
-                        <div>
-                            <a href="/listings/category/forest">
-                                <i class="fa-solid fa-tree"></i>
+
+                    <% const categories = [
+                {name:"Mountain", icon:"fa-mountain", url:"mountain"},
+                {name:"Beach", icon:"fa-umbrella-beach", url:"beach"},
+                {name:"Farm", icon:"fa-cow", url:"farm"},
+                {name:"Castle", icon:"fa-fort-awesome", url:"castle"},
+                {name:"Pool", icon:"fa-person-swimming", url:"pool"},
+                {name:"Cities", icon:"fa-city", url:"cities"},
+                {name:"Camping", icon:"fa-campground", url:"campain"},
+                {name:"Forest", icon:"fa-tree", url:"forest"},
+                {name:"Desert", icon:"fa-sun", url:"desert"},
+                {name:"Island", icon:"fa-image", url:"island"}
+                ]; %>
+
+                        <% for(let cat of categories){ %>
+                            <a href="/listings/category/<%=cat.url%>" class="filters nav-item">
+                                <div>
+                                    <i class="fa-solid <%=cat.icon%>"></i>
+                                    <p>
+                                        <%=cat.name%>
+                                    </p>
+                                </div>
                             </a>
-                            <p>Forest</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div>
-                            <a href="/listings/category/desert">
-                                <i class="fa-solid fa-sun"></i>
-                            </a>
-                            <p>Desert</p>
-                        </div>
-                    </div>
-                    <div class="filters nav-item">
-                        <div>
-                            <a href="/listings/category/island">
-                                <i class="fa-regular fa-image"></i>
-                            </a>
-                            <p>Island</p>
-                        </div>
+                            <% } %>
+
+                </div>
+
+                <!-- TAX -->
+                <div class="tax-toggle">
+                    <div class="form-check-reverse form-switch">
+                        <input class="form-check-input" type="checkbox" id="switchCheckDefault">
+                        <label class="form-check-label">Display total after taxes</label>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="tax-toggle">
-                <div class="form-check-reverse form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                    <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
-                </div>
             </div>
         </div>
     </nav>
-    <!-- <form method="get" action="/listings/new">
-            <button>Create New Listing</button>
-        </form> -->
-    <br>
-    <div class="row  row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-        <% for (listing of allListings){ %>
-            <a href="/listings/<%=listing._id %>" class="listing-link">
-                <div class="card col listing-card" style="width: 20rem;">
-                    <img src="<%=listing.image.url%>" class="card-img-top" alt="/listing.img" style="height:20rem;">
-                    <div class="card-img-overlay"></div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <b><%= listing.title %></b><br> &#8377;
-                            <%=listing.price.toLocaleString("en-IN") %>/night
-                                <i class="tax-info"> &nbsp;&nbsp;+18% GST</i>
-                        </p>
-                    </div>
+
+    <!-- LISTINGS -->
+    <div class="container">
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+
+            <% for (listing of allListings){ %>
+                <div class="col">
+                    <a href="/listings/<%=listing._id %>" class="listing-link">
+                        <div class="card listing-card">
+                            <img src="<%=listing.image.url%>" class="card-img-top" style="height:20rem;">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <b><%= listing.title %></b><br> ₹
+                                    <%=listing.price.toLocaleString("en-IN") %>/night
+                                        <i class="tax-info"> +18% GST</i>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <%} %>
+                <% } %>
+
+        </div>
     </div>
 
     <script>
-        let taxswich = document.getElementById("switchCheckDefault");
-        taxswich.addEventListener("click", () => {
+        // TAX TOGGLE
+        let taxswitch = document.getElementById("switchCheckDefault");
+
+        taxswitch.addEventListener("click", () => {
             let taxinfo = document.getElementsByClassName("tax-info");
-            for (info of taxinfo) {
-                if (info.style.display != "inline") {
-                    info.style.display = "inline";
-                } else {
-                    info.style.display = "none"
-                }
+            for (let info of taxinfo) {
+                info.style.display = (info.style.display !== "inline") ? "inline" : "none";
             }
-        })
+        });
+
+        // AUTO CLOSE MENU ON CATEGORY CLICK (optional UX)
+        document.querySelectorAll(".filters").forEach(item => {
+            item.addEventListener("click", () => {
+                let navbarCollapse = document.getElementById("filtersNavbar");
+                let bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            });
+        });
     </script>

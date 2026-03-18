@@ -1,19 +1,25 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <!--//navar ko expand kro medium size tak and use chote ke liye contract kro -->
+<nav class="navbar navbar-expand-md sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-        <!-- //symbol liya font awsome se -->
+
+        <!-- LOGO -->
+        <a class="navbar-brand" href="/listings">
+            <i class="fa-regular fa-compass"></i>
+        </a>
+
+        <!-- HAMBURGER -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- MENU -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+            <!-- LEFT -->
             <div class="navbar-nav">
                 <a class="nav-link" href="/listings">Explore</a>
-                <!-- //href ko path ka route batavo -->
-
-
             </div>
 
+            <!-- SEARCH -->
             <form class="mx-auto search-bar" action="/listings/search" method="GET">
                 <div class="search-container">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -21,17 +27,33 @@
                 </div>
             </form>
 
+            <!-- RIGHT -->
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Add New Listing</a>
-                <%if(!currentUser){ %>
+
+                <% if(!currentUser){ %>
                     <a class="nav-link" href="/signup"><b>Sign up</b></a>
-                    <!-- //href ko path ka route batavo -->
                     <a class="nav-link" href="/login"><b>Log in</b></a>
-                    <%} %>
-                        <%if(currentUser){ %>
+                    <% } %>
+
+                        <% if(currentUser){ %>
                             <a class="nav-link" href="/logout"><b>Log out</b></a>
-                            <%} %>
+                            <% } %>
             </div>
+
         </div>
     </div>
 </nav>
+
+<script>
+    // AUTO CLOSE MENU ON CLICK (LIKE SIDEBAR)
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+            let navbarCollapse = document.getElementById("navbarNavAltMarkup");
+            let bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: false
+            });
+            bsCollapse.hide();
+        });
+    });
+</script>
