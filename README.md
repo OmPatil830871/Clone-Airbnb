@@ -3,7 +3,6 @@
 ## 📝 Overview
 Wanderlust is a full-stack Airbnb-inspired web application that allows users to explore, create, and manage property listings. Users can sign up, log in, add listings with images, and share their experiences through reviews and ratings.
 
-The application follows the MVC architecture and provides a clean, responsive user experience.
 
 ---
 
