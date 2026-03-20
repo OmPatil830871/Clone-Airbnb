@@ -6,7 +6,7 @@
             <!-- Title -->
             <div class="col-12 col-md-8 offset-md-2">
                 <h3 class="mb-3">
-                    <%= listing.title %>
+                    <%= listing?.title %>
                 </h3>
             </div>
 
@@ -14,27 +14,29 @@
             <div class="col-12 col-md-8 offset-md-2">
                 <div class="card listing-card w-100">
 
-                    <img src="<%= listing.image.url %>" class="card-img-top show_img" alt="listing_image">
+                    <img src="<%= listing?.image?.url %>" class="card-img-top show_img" alt="listing_image">
 
                     <div class="card-body">
                         <p class="text-muted">
-                            <i>Owned by: <%= listing.owner.username %></i>
+                            <i>Owned by: <%= listing?.owner?.username || "Unknown" %></i>
                         </p>
 
                         <p class="card-text">
-                            <%= listing.description %><br>
+                            <%= listing?.description %><br>
 
-                                <strong>&#8377; <%= listing.price.toLocaleString("en-IN") %></strong><br>
+                                <strong>&#8377;
+                            <%= listing?.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
+                        </strong><br>
 
-                                <%= listing.country %><br>
-                                    <%= listing.location %>
+                                <%= listing?.country %><br>
+                                    <%= listing?.location %>
                         </p>
                     </div>
                 </div>
             </div>
 
             <!-- Buttons -->
-            <% if(currentUser && listing.owner.equals(currentUser._id)) { %>
+            <% if(currentUser && listing.owner && listing.owner.equals(currentUser._id)) { %>
                 <div class="col-12 col-md-8 offset-md-2 mt-3">
                     <div class="d-flex flex-column flex-md-row gap-2 show-btns">
 
@@ -64,20 +66,22 @@
                                     <label class="form-label">Rating</label>
 
                                     <fieldset class="starability-slot">
-                                        <input type="radio" name="review[rating]" value="1" checked />
-                                        <label title="Terrible">1 star</label>
 
-                                        <input type="radio" name="review[rating]" value="2" />
-                                        <label title="Not good">2 stars</label>
+                                        <input type="radio" id="rate5" name="review[rating]" value="1" />
+                                        <label for="rate5" title="Amazing">5 stars</label>
 
-                                        <input type="radio" name="review[rating]" value="3" />
-                                        <label title="Average">3 stars</label>
+                                        <input type="radio" id="rate4" name="review[rating]" value="2" />
+                                        <label for="rate4" title="Very good">4 stars</label>
 
-                                        <input type="radio" name="review[rating]" value="4" />
-                                        <label title="Very good">4 stars</label>
+                                        <input type="radio" id="rate3" name="review[rating]" value="3" />
+                                        <label for="rate3" title="Average">3 stars</label>
 
-                                        <input type="radio" name="review[rating]" value="5" />
-                                        <label title="Amazing">5 stars</label>
+                                        <input type="radio" id="rate2" name="review[rating]" value="4" />
+                                        <label for="rate2" title="Not good">2 stars</label>
+
+                                        <input type="radio" id="rate1" name="review[rating]" value="5" />
+                                        <label for="rate1" title="Terrible">1 star</label>
+
                                     </fieldset>
                                 </div>
 
@@ -98,7 +102,7 @@
                         <% } %>
 
                             <!-- Reviews -->
-                            <% if(listing.reviews.length > 0){ %>
+                            <% if(listing.reviews && listing.reviews.length > 0){ %>
                                 <div class="col-12 col-md-10 offset-md-1">
 
                                     <h3 class="mb-3">All Reviews</h3>
@@ -111,16 +115,17 @@
                                                     <div class="card-body">
 
                                                         <h5 class="card-title">
-                                                            <i>@<%= review.author.username %></i>
+                                                            <i>@<%= review.author?.username || "Anonymous" %></i>
                                                         </h5>
 
+                                                        <!-- ⭐ KEEP YOUR ORIGINAL DISPLAY -->
                                                         <p class="starability-result" data-rating="<%=review.rating %>"></p>
 
                                                         <p>
                                                             <%= review.comment %>
                                                         </p>
 
-                                                        <% if(currentUser && review.author.equals(currentUser._id)) { %>
+                                                        <% if(currentUser && review.author && review.author.equals(currentUser._id)) { %>
                                                             <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                                                                 <button class="btn btn-sm btn-dark">Delete</button>
                                                             </form>
